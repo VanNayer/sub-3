@@ -1,0 +1,2 @@
+class PlanTemplate < ApplicationRecord
+end
