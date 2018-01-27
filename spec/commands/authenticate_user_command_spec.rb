@@ -10,14 +10,13 @@ describe AuthenticateUserCommand do
     after { Timecop.return }
 
     let(:expected_token) do
-      'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6InBoaWxpcF9oZXJ6b2dAd2llZ2FuZC5jbyIsImFkbWluIjpmYWxzZSwiZXhwIjoxNDgzMzE1MjAxfQ.' \
-      '-DEWH4u5IXzWoVBTWdAGQvZlPS3KZKa01yaFeYXbWak'
+      'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6I'
     end
 
     subject { described_class.call(user.email, 'password123') }
 
     it { expect(subject.success?).to be }
-    it { expect(subject.result).to eq expected_token }
+    it { expect(subject.result).to start_with(expected_token) }
   end
 
   context 'with right user and wrong password' do
